@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CareSlot – Clinic Appointment Booking System</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo">+</span>
+      <div>
+        <h1>CareSlot Clinic</h1>
+        <p>Clinic Appointment Booking System</p>
+      </div>
+    </div>
+    <span class="today" id="todayLabel"></span>
+  </header>
+
+  <main>
+    <!-- Dashboard -->
+    <section class="stats" aria-label="Dashboard">
+      <div class="stat"><span id="statToday">0</span><p>Today's Appointments</p></div>
+      <div class="stat"><span id="statUpcoming">0</span><p>Upcoming</p></div>
+      <div class="stat"><span id="statCompleted">0</span><p>Completed</p></div>
+      <div class="stat"><span id="statCancelled">0</span><p>Cancelled</p></div>
+      <div class="stat"><span id="statDoctors">0</span><p>Doctors</p></div>
+    </section>
+
+    <div class="grid">
+      <!-- Booking form -->
+      <section class="panel">
+        <h2>Book an Appointment</h2>
+        <form id="bookingForm" novalidate>
+          <label>Patient Name
+            <input type="text" id="patientName" placeholder="e.g. Rohan Kumar" required>
+          </label>
+          <label>Mobile Number
+            <input type="tel" id="phone" placeholder="10-digit number" maxlength="10" required>
+          </label>
+          <label>Doctor
+            <select id="doctorId" required></select>
+          </label>
+          <p class="hint" id="doctorDays"></p>
+          <label>Date
+            <input type="date" id="date" required>
+          </label>
+          <div>
+            <span class="label">Available Time Slots</span>
+            <div id="slots" class="slots"><p class="hint">Select a doctor and date to see slots.</p></div>
+          </div>
+          <label>Reason for Visit
+            <textarea id="reason" rows="2" placeholder="e.g. Fever and cough" required></textarea>
+          </label>
+          <div id="formMessage" class="message" role="status"></div>
+          <button type="submit" class="btn primary">Confirm Booking</button>
+        </form>
+      </section>
+
+      <!-- Appointment list -->
+      <section class="panel">
+        <div class="panel-head">
+          <h2>Appointments</h2>
+          <div class="filters">
+            <input type="search" id="search" placeholder="Search patient, token, doctor...">
+            <select id="statusFilter">
+              <option value="All">All</option>
+              <option value="Booked">Booked</option>
+              <option value="Completed">Completed</option>
+              <option value="Cancelled">Cancelled</option>
+            </select>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Token</th><th>Patient</th><th>Doctor</th><th>Date &amp; Time</th><th>Status</th><th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="appointmentRows"></tbody>
+          </table>
+        </div>
+        <p id="emptyState" class="empty" hidden>No appointments found.</p>
+      </section>
+    </div>
+  </main>
+
+  <div id="toast" class="toast" role="alert"></div>
+  <script src="app.js"></script>
+</body>
+</html>
